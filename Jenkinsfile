@@ -1,10 +1,38 @@
 pipeline {
     agent any 
     stages {
-        stage('Stage 1') {
+        stage('Build') {
             steps {
-                echo 'Hello world!' 
+                echo 'Build!' 
             }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test!' 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy!' 
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Post Pipeline'
+        }
+        success {
+            echo 'Post Pipeline Success'
+        }
+        failure {
+            echo 'Post Pipeline Failure'
+        }
+        unstable {
+            echo 'Post Pipeline Unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
         }
     }
 }
